@@ -209,7 +209,7 @@ void *CExynosCECAdapterCommunication::Process(void)
 
         cec_command::Format(
           cmd, initiator, destination,
-          ( size > 3 ) ? cec_opcode(buffer[1]) : CEC_OPCODE_NONE);
+          ( size > 1 ) ? cec_opcode(buffer[1]) : CEC_OPCODE_NONE);
 
         for( uint8_t i = 2; i < size; i++ )
           cmd.parameters.PushBack(buffer[i]);

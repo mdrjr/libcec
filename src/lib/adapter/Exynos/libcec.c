@@ -29,9 +29,6 @@
 #define ALOGE(args...) printf(args);
 #define ALOGI(args...) printf(args);
 
-
-#define CEC_DEBUG 1
-
 /**
  * @def CEC_DEVICE_NAME
  * Defines simbolic name of the CEC device.
@@ -57,7 +54,7 @@ static struct {
 
 int CECSetLogicalAddr(unsigned int laddr);
 
-#ifdef CEC_DEBUG
+#ifdef CEC_DEBUGGING
 inline static void CECPrintFrame(unsigned char *buffer, unsigned int size);
 #endif
 
@@ -188,7 +185,7 @@ int CECSendMessage(unsigned char *buffer, int size)
         return 0;
     }
 
-#if CEC_DEBUG
+#if CEC_DEBUGGING
     ALOGI("CECSendMessage() : ");
     CECPrintFrame(buffer, size);
 #endif
@@ -229,7 +226,7 @@ int CECReceiveMessage(unsigned char *buffer, int size, long timeout)
         return 0;
     } else if (retval) {
         bytes = read(fd, buffer, size);
-#if CEC_DEBUG
+#if CEC_DEBUGGING
         ALOGI("CECReceiveMessage() : size(%d)", bytes);
         if(bytes > 0)
             CECPrintFrame(buffer, bytes);
@@ -254,7 +251,7 @@ int CECSetLogicalAddr(unsigned int laddr)
     return 1;
 }
 
-#if CEC_DEBUG
+#if CEC_DEBUGGING
 /**
  * Print CEC frame.
  */

@@ -130,9 +130,10 @@ cec_adapter_message_state CExynosCECAdapterCommunication::Write(
     size += data.parameters.size;
   }
     
-
   if (CECSendMessage(buffer, size) != size)
     LIB_CEC->AddLog(CEC_LOG_ERROR, "%s: write failed !", __func__);
+  else
+    rc = ADAPTER_MESSAGE_STATE_SENT_ACKED;
 
   return rc;
 }
